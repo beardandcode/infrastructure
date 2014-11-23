@@ -1,0 +1,50 @@
+---
+
+# A rip off of https://github.com/alphagov/puppet-harden
+
+  - name: Install PAM packages
+    apt: pkg={{ item }} state=installed
+    with_items:
+      - libpam-passwdqc
+      - libpam-tmpdir
+
+  - name: Remove SSH symlinks which stop Bastilles protectrhost working
+    file: path={{ item }} state=absent
+    with_items:
+      - /usr/bin/rlogin
+      - /usr/bin/rsh
+      - /usr/bin/rcp
+
+  - name: Lock down console logins
+    copy: src={{ item }} dest=/{{ item }} owner=root group=root
+    with_items:
+      - etc/securetty
+      - etc/security/access.conf
+      - etc/security/limits.conf
+ 
+  - name: Create limits.d directory
+    file: path=/etc/security/limits.d state=directory owner=root group=root
+
+  - name: Remove setuid privileges
+    file: path={{ item }} mode=0755
+    with_items:
+      - /bin/mount
+      - /bin/umount
+      - /bin/fusermount
+      - /usr/bin/mtr
+      - /usr/bin/traceroute6.iputils
+
+  - name: Adjust kernel networking parameters
+    copy: src=etc/sysctl.conf dest=/etc/sysctl.conf owner=root group=root
+    notify:
+      - read sysctl.conf
+
+  - name: Set a restrictive umask
+    copy: src={{ item }} dest=/{{ item }} owner=root group=root
+    with_items:
+      - etc/pam.d/common-session
+      - etc/pam.d/common-session-noninteractive
+      - etc/ssh/ssh_config 
+
+  - name: Setup record keeping for login(1), init(8) and getty(8)
+    file: path=/var/log/wtmp owner=root group=utmp mode=0644 state=touch

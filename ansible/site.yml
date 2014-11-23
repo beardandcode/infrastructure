@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  sudo: true
+  roles:
+    - role: common
+
+- hosts: webservers
+  sudo: true
+  roles:
+    - role: postgresql
+    - role: frontend

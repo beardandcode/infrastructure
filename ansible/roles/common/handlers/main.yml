@@ -1,0 +1,7 @@
+---
+
+  - name: restart sshd
+    service: name=ssh state=restarted
+
+  - name: read sysctl.conf
+    shell: /sbin/sysctl -p

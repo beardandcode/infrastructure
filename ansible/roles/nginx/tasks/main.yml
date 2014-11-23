@@ -1,0 +1,35 @@
+---
+
+  - name: Add nginx PPA
+    apt_repository: repo='ppa:nginx/stable'
+
+  - name: Open port 80
+    shell: ufw allow 80/tcp
+
+  - name: Open port 443
+    shell: ufw allow 443/tcp
+
+  - name: Install nginx
+    apt: pkg=nginx state=installed
+
+  - name: Copy nginx.conf
+    copy: src=etc/nginx/nginx.conf dest=/etc/nginx/nginx.conf owner=root group=root mode=0644
+    notify:
+      - restart nginx
+
+  - name: Remove default site
+    file: path=/etc/nginx/sites-enabled/default state=absent
+    notify:
+      - restart nginx
+
+  - name: Add sites
+    template: dest=/etc/nginx/sites-available/{{ item.key }}.conf src="{{ item.value }}" owner=root group=root mode=0644
+    with_dict: sites
+    notify:
+      - restart nginx
+
+  - name: Enable sites
+    file: src=/etc/nginx/sites-available/{{ item.key }}.conf dest=/etc/nginx/sites-enabled/{{ item.key }}.conf state=link
+    with_dict: sites
+    notify:
+      - restart nginx

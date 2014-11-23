@@ -1,0 +1,12 @@
+*.tfplan
+*.tfstate
+*.tfstate.backup
+*.tfvars
+
+/venv
+/bin
+/.vagrant
+
+.DS_Store
+
+!/secure/*.gpg
