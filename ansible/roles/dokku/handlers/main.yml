@@ -1,0 +1,4 @@
+---
+
+  - name: reload plugins
+    shell: /usr/local/bin/dokku plugins-install

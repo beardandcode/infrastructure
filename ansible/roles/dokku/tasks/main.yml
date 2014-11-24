@@ -34,3 +34,11 @@
                     key_options="command=\"FINGERPRINT={{ item.value.fingerprint }} NAME={{ item.key }} `cat /home/dokku/.sshcommand` $SSH_ORIGINAL_COMMAND\",no-agent-forwarding,no-user-rc,no-X11-forwarding,no-port-forwarding"
     with_dict: users
 
+  - name: Installing plugins
+    git: repo={{ item.value.repo }}
+         dest=/var/lib/dokku/plugins/{{ item.key }}
+         version={{ item.value.version }}
+    with_dict: plugins
+    notify:
+      - reload plugins
+
