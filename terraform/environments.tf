@@ -26,9 +26,10 @@ resource "digitalocean_droplet" "web" {
     size = "512mb"
 
     ssh_keys = ["${var.do_ssh_id}"]
+    user_data = "webservers"
 
     provisioner "local-exec" {
-        command = "./tools/bootstrap_server.sh webservers ${digitalocean_droplet.web.ipv4_address}"
+        command = "./tools/ansible/bootstrap_server.sh webservers ${digitalocean_droplet.web.ipv4_address}"
     }
 }
 

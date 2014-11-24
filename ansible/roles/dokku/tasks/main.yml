@@ -1,0 +1,36 @@
+---
+
+  - name: Install supporting packages
+    apt: pkg={{ item }} state=installed
+    with_items:
+      - git
+      - make
+      - curl
+      - software-properties-common
+      - man-db
+
+  - name: Checkout dokku source
+    git: repo=https://github.com/progrium/dokku.git
+         dest=/opt/dokku
+         version={{ version }}
+
+  - name: Add dokku user
+    user: name=dokku
+          home=/home/dokku
+          password="$6$/t7Y696mWgLvg/3$pMWcPJiu.VN8bdmrR0vayCc7fBxGPBCg/L7nTtfHRn19R0fS68wzLVFsiXqhIi42cCdUs9vGfRdD/6xrEfpBI1"
+
+  - name: Install dokku
+    shell: BUILD_STACK=true make install
+    args:
+      chdir: /opt/dokku
+      creates: /usr/local/bin/dokku
+
+  - name: Setting up VHOST
+    template: dest=/home/dokku/VHOST src="roles/dokku/templates/VHOST.j2" owner=root group=root mode=0644
+
+  - name: Set users public keys
+    authorized_key: user=dokku
+                    key="{{ item.value.key }}"
+                    key_options="command=\"FINGERPRINT={{ item.value.fingerprint }} NAME={{ item.key }} `cat /home/dokku/.sshcommand` $SSH_ORIGINAL_COMMAND\",no-agent-forwarding,no-user-rc,no-X11-forwarding,no-port-forwarding"
+    with_dict: users
+

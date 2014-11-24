@@ -30,7 +30,7 @@
     lineinfile: "dest=/etc/sudoers regexp='^%sudo' line='%sudo ALL=NOPASSWD: ALL'"
 
   - name: Add users
-    user: name={{ item.key }} groups={{ item.value.groups }} shell=/bin/bash password=$6$VR9vTOUV0Lo$WnAgRTZ6iKt6KRfX910TlZSkOmYZIAKO0CUxITdj2erXQfrXuMkk7gw/KRlzcAXQyI32SnMT4W4SY7GQrn3q40
+    user: name={{ item.key }} groups={{ item.value.groups }} shell=/bin/bash password="$6$/t7Y696mWgLvg/3$pMWcPJiu.VN8bdmrR0vayCc7fBxGPBCg/L7nTtfHRn19R0fS68wzLVFsiXqhIi42cCdUs9vGfRdD/6xrEfpBI1"
     with_dict: users
 
   - name: Set users public keys

@@ -9,4 +9,8 @@
   sudo: true
   roles:
     - role: postgresql
-    - role: frontend
+    - role: nginx
+      sites:
+        root_redirect: 'root-redirect.conf.j2'
+    - role: dokku
+      version: 'v0.3.2'

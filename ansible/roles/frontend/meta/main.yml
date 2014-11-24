@@ -1,6 +1,0 @@
----
-
-dependencies:
-  - role: nginx
-    sites:
-      www: "roles/frontend/templates/www.conf.j2" 
