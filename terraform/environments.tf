@@ -22,7 +22,7 @@ provider "dnsimple" {
 resource "digitalocean_droplet" "web" {
     name = "${var.domain_name}-web"
     region = "ams3"
-    image = "6918990"
+    image = "ubuntu-14-04-x64"
     size = "512mb"
 
     ssh_keys = ["${var.do_ssh_id}"]
