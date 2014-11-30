@@ -15,6 +15,50 @@ resource "dnsimple_record" "wildcard" {
     ttl = 3600
 }
 
+
+
+resource "dnsimple_record" "mail_receiving_0" {
+    domain = "${var.domain_name}"
+    name = "@"
+    value = "${mailgun_domain.default.receiving_records.0.value}."
+    type = "${mailgun_domain.default.receiving_records.0.record_type}"
+    ttl = 3600
+}
+
+resource "dnsimple_record" "mail_receiving_1" {
+    domain = "${var.domain_name}"
+    name = "@"
+    value = "${mailgun_domain.default.receiving_records.1.value}."
+    type = "${mailgun_domain.default.receiving_records.1.record_type}"
+    ttl = 3600
+}
+
+resource "dnsimple_record" "mail_sending_0" {
+    domain = "${var.domain_name}"
+    name = ""
+    value = "${mailgun_domain.default.sending_records.0.value}."
+    type = "${mailgun_domain.default.sending_records.0.record_type}"
+    ttl = 3600
+}
+
+resource "dnsimple_record" "mail_sending_1" {
+    domain = "${var.domain_name}"
+    name = "pic._domainkey"
+    value = "${mailgun_domain.default.sending_records.1.value}."
+    type = "${mailgun_domain.default.sending_records.1.record_type}"
+    ttl = 3600
+}
+
+resource "dnsimple_record" "mail_sending_2" {
+    domain = "${var.domain_name}"
+    name = "email"
+    value = "${mailgun_domain.default.sending_records.2.value}."
+    type = "${mailgun_domain.default.sending_records.2.record_type}"
+    ttl = 3600
+}
+
+
+
 resource "dnsimple_record" "fwstringer_root" {
     domain = "fwstringer.com"
     name = ""
