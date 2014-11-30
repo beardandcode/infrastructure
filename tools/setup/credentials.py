@@ -26,6 +26,21 @@ def main():
     dnsimple_email = raw_input("Email address: ")
     dnsimple_token = raw_input("Token: ")
 
+    print
+    print
+    print "Mailgun"
+    print "You can find your API token here: https://mailgun.com/cp"
+    print
+
+    mailgun_token = raw_input("Token: ")
+
+    print
+    print
+    print "Application Configuration"
+    print
+
+    smtp_password = raw_input("SMTP password: ")
+
     credentials_content = """
 # Digital Ocean v1
 
@@ -40,7 +55,15 @@ DO_V2_TOKEN='{2}'
 
 DNSIMPLE_EMAIL='{3}'
 DNSIMPLE_TOKEN='{4}'
-    """.format(do_v1_client_id, do_v1_api_key, do_v2_token, dnsimple_email, dnsimple_token)
+
+# Mailgun
+
+MAILGUN_TOKEN='{5}'
+
+# Application Configuration
+
+SMTP_PASSWORD='{6}'
+    """.format(do_v1_client_id, do_v1_api_key, do_v2_token, dnsimple_email, dnsimple_token, mailgun_token, smtp_password)
 
     with open("secure/CREDENTIALS.sh", "w") as credentials_file:
         credentials_file.write(credentials_content)

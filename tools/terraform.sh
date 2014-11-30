@@ -13,6 +13,8 @@ bin/terraform $1 -var "do_token=${DO_V2_TOKEN}" \
                  -var "do_ssh_id=${DO_SSH_KEY_ID}" \
                  -var "dnsimple_email=${DNSIMPLE_EMAIL}" \
                  -var "dnsimple_token=${DNSIMPLE_TOKEN}" \
+                 -var "mailgun_token=${MAILGUN_TOKEN}" \
+                 -var "smtp_password=${SMTP_PASSWORD}" \
                  -var "domain_name=${domain_name}" \
                  -state=./terraform/terraform.tfstate \
                  ./terraform
