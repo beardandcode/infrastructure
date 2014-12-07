@@ -91,3 +91,19 @@ resource "dnsimple_record" "alicepayne_www" {
     ttl = 3600
 }
 
+resource "dnsimple_record" "artbyyou_root" {
+    domain = "artbyyou.co.uk"
+    name = ""
+    value = "${var.domain_name}"
+    type = "ALIAS"
+    ttl = 3600
+}
+
+resource "dnsimple_record" "artbyyou_www" {
+    domain = "artbyyou.co.uk"
+    name = "www"
+    value = "${var.domain_name}"
+    type = "CNAME"
+    ttl = 3600
+}
+
