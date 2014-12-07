@@ -5,3 +5,6 @@
 
   - name: read sysctl.conf
     shell: /sbin/sysctl -p
+
+  - name: mount swapfile
+    shell: mkswap /swapfile && swapon /swapfile

@@ -9,6 +9,7 @@
   - name: Upgrade APT to the lastest packages
     apt: upgrade=safe
 
+  - include: swap.yml
   - include: harden.yml
 
   - name: Install base packages
