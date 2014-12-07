@@ -39,3 +39,6 @@
     notify:
       - reload plugins
 
+  - name: Writing dokkurc
+    template: dest=/home/dokku/dokkurc src="roles/dokku/templates/dokkurc.j2" owner=root group=root mode=0644
+

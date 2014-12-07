@@ -35,6 +35,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         ansible.groups = groups
         ansible.extra_vars = {
           domain_name: domain_name,
+          slack_url: "http://not-a-domain",
         }
       end
     end

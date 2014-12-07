@@ -1,0 +1,11 @@
+# Global environment variables
+{% for (key, value) in env.iteritems() %}
+export {{ key }}="{{ value }}"
+{% endfor %}
+{% for (name, settings) in plugins.iteritems() %}
+
+# Environment variables for {{ name }}
+{% for (key, value) in settings.get('env', {}).iteritems() %}
+export {{ key }}="{{ value }}"
+{% endfor %}
+{% endfor %}

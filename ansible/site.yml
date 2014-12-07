@@ -21,3 +21,11 @@
         dokku-rebuild:
           repo: https://github.com/scottatron/dokku-rebuild.git
           version: c58cbecaa85133538aa7747073f0d82ba4834ac4
+        dokku-slack:
+          repo: https://github.com/beardandcode/dokku-slack.git
+          version: slack-incoming-url
+          env:
+            SLACK_NOTIFY: 1
+            SLACK_URL: "{{ slack_url }}"
+            SLACK_USERNAME: "dokkubot"
+            SLACK_CHANNEL: "infrastructure"
