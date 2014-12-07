@@ -13,7 +13,7 @@
       sites:
         root_redirect: 'root-redirect.conf.j2'
     - role: dokku
-      version: 'v0.3.2'
+      version: 'v0.3.7'
       plugins:
         custom-domains:
           repo: https://github.com/neam/dokku-custom-domains.git

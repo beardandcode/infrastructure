@@ -2,3 +2,9 @@
 
   - name: reload plugins
     shell: /usr/local/bin/dokku plugins-install
+
+  - name: install dokku
+    shell: BUILD_STACK=true make install
+    args:
+      chdir: /opt/dokku
+
