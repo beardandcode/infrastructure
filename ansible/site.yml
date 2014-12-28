@@ -29,3 +29,6 @@
             SLACK_URL: "{{ slack_url }}"
             SLACK_USERNAME: "dokkubot"
             SLACK_CHANNEL: "infrastructure"
+        dokku-pg-plugin:
+          repo: https://github.com/beardandcode/dokku-pg-plugin.git
+          version: improvements
